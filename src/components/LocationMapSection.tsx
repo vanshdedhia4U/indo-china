@@ -20,10 +20,27 @@ export const LocationMapSection: React.FC = () => {
 
   const currentEmbedUrl = mapMode === 'place' ? placeEmbedUrl : directionsEmbedUrl;
 
-  const handleCopyAddress = () => {
-    navigator.clipboard.writeText(RESTAURANT_INFO.address);
-    setCopiedAddress(true);
-    setTimeout(() => setCopiedAddress(false), 2000);
+  const handleCopyAddress = async () => {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(RESTAURANT_INFO.address);
+      } else {
+        const textarea = document.createElement('textarea');
+        textarea.value = RESTAURANT_INFO.address;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+      }
+      setCopiedAddress(true);
+      setTimeout(() => setCopiedAddress(false), 2000);
+    } catch {
+      // Fallback silent ignore
+      setCopiedAddress(true);
+      setTimeout(() => setCopiedAddress(false), 2000);
+    }
   };
 
   return (
