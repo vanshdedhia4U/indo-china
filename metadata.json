@@ -1,0 +1,8 @@
+{
+  "name": "Indo China - Family Restaurant",
+  "description": "Authentic Indo-Chinese culinary experience in Ambernath. Explore our rich menu of sizzlers, noodles, momos, reserve a table, and find directions.",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
